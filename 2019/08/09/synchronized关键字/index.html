@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>synchronized关键字 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="synchronized关键字用于解决多线程之间资源访问的同步性，被synchronized关键字修饰的方法、代码块同一时刻只能有一个线程进入。它是一种基本的互斥同步手段。 在代码中具体体现为同步方法和同步代码块： 123456789101112131415161718192021222324/** * 同步非静态方法 */public synchronized void function1()">
+<meta name="keywords" content="并发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="synchronized关键字">
+<meta property="og:url" content="http://yoursite.com/2019/08/09/synchronized关键字/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="synchronized关键字用于解决多线程之间资源访问的同步性，被synchronized关键字修饰的方法、代码块同一时刻只能有一个线程进入。它是一种基本的互斥同步手段。 在代码中具体体现为同步方法和同步代码块： 123456789101112131415161718192021222324/** * 同步非静态方法 */public synchronized void function1()">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-09T13:49:42.920Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="synchronized关键字">
+<meta name="twitter:description" content="synchronized关键字用于解决多线程之间资源访问的同步性，被synchronized关键字修饰的方法、代码块同一时刻只能有一个线程进入。它是一种基本的互斥同步手段。 在代码中具体体现为同步方法和同步代码块： 123456789101112131415161718192021222324/** * 同步非静态方法 */public synchronized void function1()">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-synchronized关键字" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/09/synchronized关键字/" class="article-date">
+  <time datetime="2019-08-09T12:49:38.000Z" itemprop="datePublished">2019-08-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      synchronized关键字
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>synchronized关键字用于解决多线程之间资源访问的同步性，被synchronized关键字修饰的方法、代码块同一时刻只能有一个线程进入。它是一种基本的互斥同步手段。</p>
+<p>在代码中具体体现为同步方法和同步代码块：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 同步非静态方法</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">function1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//TODO</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 同步静态方法</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">function2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//TODO</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 同步代码块</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">function3</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//before</span></span><br><span class="line">    <span class="keyword">synchronized</span> (reference) &#123;</span><br><span class="line">    <span class="comment">//TODO       </span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//after</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同步方法有两种，一是修饰非静态方法，而是修饰静态方法。同步代码块就是通过synchronized的关键字直接修饰代码块，并显示的指明锁的对象。</p>
+<h5 id="对象锁与类锁"><a href="#对象锁与类锁" class="headerlink" title="对象锁与类锁"></a>对象锁与类锁</h5><p>对象锁就是锁的对象时实例对象或成员变量对象，如上面的同步非静态方法和同步代码（reference是this或成员变量）。类锁指的是锁的对象是类（实际上是类的class对象，因为每个类只对应一个class对象，无论实例化多个对象，都指向同一个class对象），如上面的同步静态方法和同步代码块（reference是Xxx.class）。</p>
+<p>在同步方法中，如果一个线程得到对象锁进入同步方法时，其余线程是无法进入该对象的任何同步方法的（不仅仅只是该同步方法），只有当该线程执行完毕或者抛出异常释放锁之后，其余线程才有机会获取锁进入同步方法。</p>
+<p>而在同步代码块中，之后同步代码块的范围需要获取锁对象才能访问，即before和after部分的代码是不受影响的，多线程情况下还是可以同时访问，只有在进入同步代码块的时候需要获取锁，按顺序执行代码块。</p>
+<p>从上面可以看出，同步方法与同步代码块的主要区别在于并发控制的粒度的粗细不同，同步方法粒度比较粗，只要是同步方法就得按顺序执行；而同步代码块的粒度就比较细了，在方法中，我们可以选择需要同步控制的代码范围，在同步代码块的范围之外，还是可以并发访问的。</p>
+<p>以上是synchronized关键字的基本概念，更多关于synchronized的内容以后继续更新！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/08/09/synchronized关键字/" data-id="cjz4639st00007oudyzzzom1d" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/07/21/自建Shadowsocks梯子/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">自建Shadowsocks梯子</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shadowsocks/">Shadowsocks</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shadowsocks/">Shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Shadowsocks/" style="font-size: 10px;">Shadowsocks</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/08/09/synchronized关键字/">synchronized关键字</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/21/自建Shadowsocks梯子/">自建Shadowsocks梯子</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/20/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
