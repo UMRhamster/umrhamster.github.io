@@ -62,6 +62,137 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-树莓派4b安装manjaro" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/01/树莓派4b安装manjaro/" class="article-date">
+  <time datetime="2019-12-01T07:50:33.000Z" itemprop="datePublished">2019-12-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/01/树莓派4b安装manjaro/">树莓派4b安装manjaro</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="一、前置条件"><a href="#一、前置条件" class="headerlink" title="一、前置条件"></a>一、前置条件</h4><p>树莓派4b(2GB)一个、一张sd卡和一个读卡器</p>
+<h4 id="二、开始安装manjaro"><a href="#二、开始安装manjaro" class="headerlink" title="二、开始安装manjaro"></a>二、开始安装manjaro</h4><p>1.首先去官网下载manjaro_arm版</p>
+<p><a href="https://www.manjaro.org/download/" target="_blank" rel="noopener">树莓派官网</a></p>
+<p>按照如图所示下载manjrao，国内环境下的下载速度可能会比较慢，需要耐心等待或去贴吧或论坛寻找资源，建议可以挂一个晚上下载。</p>
+<p><img src="https://umrhamster.github.io/images/manjaro_arm_1.pn" alt="manjaro_arm下载"></p>
+<p>2.使用sdformatter对sd卡进行格式化</p>
+<p>sdfomatter可直接百度下载，这里就不给下载地址了</p>
+<p>选择快速格式化，开启逻辑大小调整，点击OK进行格式化</p>
+<p><img src="https://umrhamster.github.io/images/sdformatter1.png" alt="sdfomatter"></p>
+<p>3.使用diskmanager烧录系统至sd卡</p>
+<p>diskmanager可直接百度下载</p>
+<p>在第一步中下载的是压缩包，需要先进行解压。</p>
+<p>解压之后，在dismanager中选中系统镜像，device选择sd卡，点击write进行烧录。</p>
+<p><img src="https://umrhamster.github.io/images/diskmanager1.png" alt="diskmanager"></p>
+<p>烧录结束后，会弹出格式化提醒；这里我点击格式化之后系统不能正常启动，建议都尝试一下。</p>
+<p>4.系统安装</p>
+<p>在正是安装系统前，需要对boot进行一些配置，当前如果是有图形界面的系统可以先跳过此步骤。</p>
+<p>a.开启SSH</p>
+<p>在sd卡的根目录(boot分区)新建“SSH”文件，注意没有后缀。</p>
+<p>b.配置wifi网络连接</p>
+<p>在boot分区下新建wpa_supplicant.conf文件</p>
+<p>ssid是wifi名称</p>
+<p>psk是wifi密码</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">country=CN</span><br><span class="line">ctrl_interface=DIR=/<span class="keyword">var</span>/run/wpa_supplicant GROUP=netdev</span><br><span class="line">update_config=<span class="number">1</span></span><br><span class="line"></span><br><span class="line">network=&#123;</span><br><span class="line">    ssid=<span class="string">"wifiname"</span></span><br><span class="line">    psk=<span class="string">"password"</span></span><br><span class="line">    priority=<span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为下载的是由图形界面的manjaro系统，直接将sd卡插入树莓派，启动电源。</p>
+<p>按照引导，设置键盘和时区，进入桌面。</p>
+<p>会发现桌面上的中文（如果选择的是中文语言）全是方块形的乱码，原因是缺少中文字体，可通过以下命令安装中文字体：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S wqy-microhei</span><br></pre></td></tr></table></figure>
+
+<p>最好重新启动一下系统，至此在树莓派上安装manjaro已经完成。</p>
+<h4 id="三、安装远程桌面"><a href="#三、安装远程桌面" class="headerlink" title="三、安装远程桌面"></a>三、安装远程桌面</h4><p>大部分人肯定还是喜欢有图形界面的系统的，但是不是人人都有两个显示器的，所以还是在pc上通过远程访问manjaro的比较好。</p>
+<p>1.在manjaro上安装vncserver，这里使用x11vnc作为vncserver</p>
+<p>安装：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S x11vnc</span><br></pre></td></tr></table></figure>
+
+<p>生成密码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x11vnc -storepasswd</span><br><span class="line"></span><br><span class="line">Enter VNC password: ********</span><br><span class="line">Verify password: ********</span><br><span class="line">Write password to /home/USERHOME/.vnc/passwd? [y]/n y</span><br><span class="line">Password written to: /home/USERHOME/.vnc/passwd</span><br></pre></td></tr></table></figure>
+
+<p>开启服务：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x11vnc -auth guess -once -loop -noxdamage -repeat -rfbauth /home/USERNAME/.vnc/passwd -rfbport 5900 -shared</span><br></pre></td></tr></table></figure>
+
+<p>2.windows上安装vnclient，选择vncviewer即可</p>
+<p>可以直接百度下载</p>
+<h4 id="四、参考链接"><a href="#四、参考链接" class="headerlink" title="四、参考链接"></a>四、参考链接</h4><p><a href="https://www.cnblogs.com/jinzesudawei/p/11675134.html" target="_blank" rel="noopener">Manjaro ARM系统配置</a></p>
+<p><a href="https://www.quarkbook.com/?p=657" target="_blank" rel="noopener">树莓派4系统下载</a></p>
+<p><a href="https://www.jianshu.com/p/467335f07e05" target="_blank" rel="noopener">树莓派3b+安装Raspbian系统</a></p>
+<p><a href="https://baijiahao.baidu.com/s?id=1593271416962187624&wfr=spider&for=pc" target="_blank" rel="noopener">快速入门指南，玩转树莓派</a></p>
+<p><a href="https://www.jianshu.com/p/463ab37781ca" target="_blank" rel="noopener">Manjaro使用手札</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/01/树莓派4b安装manjaro/" data-id="ck3mr875n0000wgudqktoecxv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/树莓派/">树莓派</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-volatile关键字" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/09/19/volatile关键字/" class="article-date">
+  <time datetime="2019-09-19T14:51:50.000Z" itemprop="datePublished">2019-09-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/19/volatile关键字/">volatile关键字</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>volatile是Java提供的一种轻量级的同步机制。</p>
+<h5 id="Java内存模型"><a href="#Java内存模型" class="headerlink" title="Java内存模型"></a>Java内存模型</h5><p>Java虚拟机有自己的内存模型(Java Memory Model, JMM)，JMM可以屏蔽掉各种硬件和操作系统的内存访问差异，以实现让Java程序在各种平台下都能达到一致的内存访问效果。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/09/19/volatile关键字/" data-id="ck3mr5dly00058cudvb0zs29c" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-JVM与DVM" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/08/17/JVM与DVM/" class="article-date">
@@ -111,7 +242,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/17/JVM与DVM/" data-id="cjzo8l4s200006cudrs1x2cya" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/17/JVM与DVM/" data-id="ck3mr5dli00008cudzjoang8q" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/编译/">编译</a></li></ul>
@@ -163,7 +294,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/09/synchronized关键字/" data-id="cjzo8l4s900016cudeketn8ax" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/09/synchronized关键字/" data-id="ck3mr5dlp00018cudxt3esg32" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li></ul>
@@ -258,7 +389,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/21/自建Shadowsocks梯子/" data-id="cjzo8l4si00056cud58y8z51x" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/21/自建Shadowsocks梯子/" data-id="ck3mr5dlw00048cud3z9ldf5i" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shadowsocks/">Shadowsocks</a></li></ul>
@@ -309,7 +440,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/20/hello-world/" data-id="cjzo8l4sg00046cudezel76dv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/20/hello-world/" data-id="ck3mr5dm000068cud9x5oz1he" class="article-share-link">Share</a>
       
       
     </footer>
@@ -339,7 +470,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shadowsocks/">Shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编译/">编译</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shadowsocks/">Shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树莓派/">树莓派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编译/">编译</a></li></ul>
     </div>
   </div>
 
@@ -349,7 +480,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Shadowsocks/" style="font-size: 10px;">Shadowsocks</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/编译/" style="font-size: 10px;">编译</a>
+      <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Shadowsocks/" style="font-size: 10px;">Shadowsocks</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/并发/" style="font-size: 20px;">并发</a> <a href="/tags/树莓派/" style="font-size: 10px;">树莓派</a> <a href="/tags/编译/" style="font-size: 10px;">编译</a>
     </div>
   </div>
 
@@ -358,7 +489,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li></ul>
     </div>
   </div>
 
@@ -371,6 +502,14 @@
       <ul>
         
           <li>
+            <a href="/2019/12/01/树莓派4b安装manjaro/">树莓派4b安装manjaro</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/19/volatile关键字/">volatile关键字</a>
+          </li>
+        
+          <li>
             <a href="/2019/08/17/JVM与DVM/">JVM与DVM</a>
           </li>
         
@@ -380,10 +519,6 @@
         
           <li>
             <a href="/2019/07/21/自建Shadowsocks梯子/">自建Shadowsocks梯子</a>
-          </li>
-        
-          <li>
-            <a href="/2019/07/20/hello-world/">Hello World</a>
           </li>
         
       </ul>
