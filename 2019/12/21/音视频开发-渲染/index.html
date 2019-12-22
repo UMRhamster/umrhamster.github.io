@@ -5,15 +5,20 @@
   
 
   
-  <title>Tag: 编译 | Hexo</title>
+  <title>音视频开发---渲染 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/tags/编译/index.html">
+  <meta name="description" content="我们使用计算机时，是通过二维的显示器去观察的，所以需要将模型从三维空间渲染到二维空间中，直观点讲，就是生成一张二维图片可在显示器上显示。 渲染有两种：1、光栅格 光栅化，就是光纤从模型发射。 在现实世界中，我们能够观察到物体是因为物体将光线反射到了我们眼中（准确的说是视网膜上）。借此概念，在三维空间中添加一个摄像头，是一个点；在其放置一个网格，代表显示屏幕。将模型的各个边界顶点与摄像头之间连接一条">
+<meta name="keywords" content="音视频开发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="音视频开发---渲染">
+<meta property="og:url" content="http://yoursite.com/2019/12/21/音视频开发-渲染/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="我们使用计算机时，是通过二维的显示器去观察的，所以需要将模型从三维空间渲染到二维空间中，直观点讲，就是生成一张二维图片可在显示器上显示。 渲染有两种：1、光栅格 光栅化，就是光纤从模型发射。 在现实世界中，我们能够观察到物体是因为物体将光线反射到了我们眼中（准确的说是视网膜上）。借此概念，在三维空间中添加一个摄像头，是一个点；在其放置一个网格，代表显示屏幕。将模型的各个边界顶点与摄像头之间连接一条">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-12-22T10:07:16.124Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="音视频开发---渲染">
+<meta name="twitter:description" content="我们使用计算机时，是通过二维的显示器去观察的，所以需要将模型从三维空间渲染到二维空间中，直观点讲，就是生成一张二维图片可在显示器上显示。 渲染有两种：1、光栅格 光栅化，就是光纤从模型发射。 在现实世界中，我们能够观察到物体是因为物体将光线反射到了我们眼中（准确的说是视网膜上）。借此概念，在三维空间中添加一个摄像头，是一个点；在其放置一个网格，代表显示屏幕。将模型的各个边界顶点与摄像头之间连接一条">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -60,40 +65,65 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/08/17/JVM与DVM/" class="archive-article-date">
-  <time datetime="2019-08-17T03:25:44.000Z" itemprop="datePublished">Aug 17</time>
+        <section id="main"><article id="post-音视频开发-渲染" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/21/音视频开发-渲染/" class="article-date">
+  <time datetime="2019-12-21T13:31:42.000Z" itemprop="datePublished">2019-12-21</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/17/JVM与DVM/">JVM与DVM</a>
+    <h1 class="article-title" itemprop="name">
+      音视频开发---渲染
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我们使用计算机时，是通过二维的显示器去观察的，所以需要将模型从三维空间渲染到二维空间中，直观点讲，就是生成一张二维图片可在显示器上显示。</p>
+<p>渲染有两种：<br>1、光栅格</p>
+<p>光栅化，就是光纤从模型发射。</p>
+<p>在现实世界中，我们能够观察到物体是因为物体将光线反射到了我们眼中（准确的说是视网膜上）。借此概念，在三维空间中添加一个摄像头，是一个点；在其放置一个网格，代表显示屏幕。将模型的各个边界顶点与摄像头之间连接一条直线，这样直线与网格相交一点，我们知道了边界后，将投影到网格上的点连接起来，判断内外后同相同颜色像素渲染。这种投影到像素点的方式就是计算机图形学中的光栅化的渲染方法。</p>
+<p>光栅化是以物体为中心，也就是从摄像头捕捉物体反射到摄像头的光线。但是我们只捕捉了能够穿过要显示的屏幕网格的光线。考虑到我们只捕捉了有用的光线，那么为什么我们从摄像头的角度出发，将光线从摄像机发射出去呢？</p>
+<p>2、光线追踪</p>
+<p>从摄像头出发，向像素网格中的每一个像素都发射一条光线，如果一条光线遇到多个物体，我们会选择光线第一次接触的点，也就是最近的一个点。</p>
+<p>光线追踪的原理说起来非常简单，但是它的计算量是非常大的。对于一个1920x1080的屏幕需要计算1920x1080条光线来判断是否与场景中的物理相交。</p>
+<p>但是光线追踪可以有效的解决光栅化的三个问题：阴影、反射和折射。</p>
+<p>对于阴影问题，通过在反射方向上绘制二次光线来绘制阴影光线，只要这个光线可以反射到光源（这里的光源不是指摄像头哦~），那么我们就知道是光源照亮的这个物体。</p>
+<p>如果光源和表面之间存在物体，那么该表面就处于阴影中。</p>
+<p>光线追踪，实际上就是模拟真实光线在物体周围反射时的真实行为。</p>
 
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/21/音视频开发-渲染/" data-id="ck4gumd4z000hl4m7hzmnr6je" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/音视频开发/">音视频开发</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/12/01/树莓派4b安装manjaro/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">树莓派4b安装manjaro</div>
+    </a>
+  
+</nav>
+
+  
+</article>
 
 </section>
         
