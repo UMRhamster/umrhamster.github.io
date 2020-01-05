@@ -62,6 +62,103 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Java-8-Stream" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/01/05/Java-8-Stream/" class="article-date">
+  <time datetime="2020-01-05T11:33:55.000Z" itemprop="datePublished">2020-01-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/05/Java-8-Stream/">Java 8 Stream</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Stream是Java 8的新特性，它与java.io包中的InputStream和OutputStream是完全不同的概念。</p>
+<p>Java 8中的Stream是对集合对象功能的增强，它专注于对集合对象进行各种非常便利、高效的聚合操作，或者大批量数据操作。Stream API 借助于同样新出现的 Lambda 表达式，极大的提高编程效率和程序可读性。同时它提供串行和并行两种模式进行汇聚操作，并发模式能够充分利用多核处理器的优势，使用 fork/join 并行方式来拆分任务和加速处理过程。</p>
+<p>Stream不是集合元素，它不是数据结构并不保存数据，它是有关算法和计算的，它更像一个高级版的Iterator。</p>
+<p>Stream的操作类型分为两种：</p>
+<ul>
+<li><p>Intermediate   通过一系列中间方法，对数据进行过滤、检索等数据集的再次处理。</p>
+</li>
+<li><p>Terminal   通过最终方法完成对数据集中元素的处理。</p>
+</li>
+</ul>
+<h5 id="创建Stream"><a href="#创建Stream" class="headerlink" title="创建Stream"></a>创建Stream</h5><ol>
+<li><p>从Collection和数组</p>
+<p> Collection.stream()</p>
+<p> Collection.parallelStream()</p>
+<p> Arrays.stream(T array) or Stream.of()</p>
+</li>
+<li><p>静态工厂</p>
+<p> java.util.stream.IntStream.range()</p>
+<p> java.nio.file.Files.walk()</p>
+</li>
+</ol>
+<h5 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h5><p>filter方法对原Stream按照指定条件过滤，在新建的Stream中，只包含满足条件的元素，将不满足条件的元素过滤掉。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Stream.of(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>)</span><br><span class="line">    .filter(item -&gt; item &gt; <span class="number">3</span>)</span><br><span class="line">    .forEach(System.out::println);</span><br></pre></td></tr></table></figure>
+
+<h5 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h5><p>map方法将对Stream中包含的元素使用给定的转换函数进行转换操作，新生成的Stream只包含转换生成的元素。为了提高处理效率，官方已封装好了三种基础数据的变形，mapToDouble, mapToInt, mapToLong。</p>
+<h5 id="FlatMap"><a href="#FlatMap" class="headerlink" title="FlatMap"></a>FlatMap</h5><p>flatmap方法和map方法类似，都是将原Stream中的每一个元素通过转换函数转换，不同的是，该转换函数的对象是一个Stream,也不会在创建一个新的Stream,而是将圆Stream的元素取代为转换的Stream。</p>
+<h5 id="Collect"><a href="#Collect" class="headerlink" title="Collect"></a>Collect</h5><p>calloect方法是一种聚合操作，用于封装目标数据。</p>
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><p>总之，Stream 的特性可以归纳为：</p>
+<ul>
+<li><p>不是数据结构</p>
+</li>
+<li><p>它没有内部存储，它只是用操作管道从 source（数据结构、数组、generator function、IO channel）抓取数据。</p>
+</li>
+<li><p>它也绝不修改自己所封装的底层数据结构的数据。例如 Stream 的 filter 操作会产生一个不包含被过滤元素的新 Stream，而不是从 source 删除那些元素。</p>
+</li>
+<li><p>所有 Stream 的操作必须以 lambda 表达式为参数</p>
+</li>
+<li><p>不支持索引访问</p>
+</li>
+<li><p>你可以请求第一个元素，但无法请求第二个，第三个，或最后一个。不过请参阅下一项。</p>
+</li>
+<li><p>很容易生成数组或者 List</p>
+</li>
+<li><p>惰性化</p>
+</li>
+<li><p>很多 Stream 操作是向后延迟的，一直到它弄清楚了最后需要多少数据才会开始。</p>
+</li>
+<li><p>Intermediate 操作永远是惰性化的。</p>
+</li>
+<li><p>并行能力</p>
+</li>
+<li><p>当一个 Stream 是并行化的，就不需要再写多线程代码，所有对它的操作会自动并行进行的。</p>
+</li>
+<li><p>可以是无限的</p>
+<ul>
+<li>集合有固定大小，Stream 则不必。limit(n) 和 findFirst() 这类的 short-circuiting 操作可以对无限的 Stream 进行运算并很快完成。</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/01/05/Java-8-Stream/" data-id="ck50z6x8t0000aom7m5fqowun" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-音视频开发-渲染" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/12/21/音视频开发-渲染/" class="article-date">
@@ -100,7 +197,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/21/音视频开发-渲染/" data-id="ck4gumd4z000hl4m7hzmnr6je" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/21/音视频开发-渲染/" data-id="ck50z6x9y000raom7hg2fgw7h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/音视频开发/">音视频开发</a></li></ul>
@@ -187,7 +284,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/01/树莓派4b安装manjaro/" data-id="ck4gumd5t000ml4m7yu5j0eq0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/01/树莓派4b安装manjaro/" data-id="ck50z6x9b0009aom7nocmjch4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/树莓派/">树莓派</a></li></ul>
@@ -231,7 +328,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/19/volatile关键字/" data-id="ck4gumd4g0001l4m7n9ubwrao" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/19/volatile关键字/" data-id="ck50z6x930003aom7i9js05t3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li></ul>
@@ -292,7 +389,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/17/JVM与DVM/" data-id="ck4gumd4l0004l4m7l33uxnia" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/17/JVM与DVM/" data-id="ck50z6x8z0001aom7owdmh7zy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/编译/">编译</a></li></ul>
@@ -344,7 +441,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/09/synchronized关键字/" data-id="ck4gumd490000l4m79sskqmeq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/09/synchronized关键字/" data-id="ck50z6x9w000qaom7d6a0sdv2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li></ul>
@@ -439,7 +536,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/21/自建Shadowsocks梯子/" data-id="ck4gumd5r000ll4m7ohrr78aj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/21/自建Shadowsocks梯子/" data-id="ck50z6x990006aom7g68zbids" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shadowsocks/">Shadowsocks</a></li></ul>
@@ -490,7 +587,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/20/hello-world/" data-id="ck4gumd5p000kl4m7mqoorssr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/20/hello-world/" data-id="ck50z6x960005aom7u6pxuyfd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -520,7 +617,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shadowsocks/">Shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树莓派/">树莓派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编译/">编译</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/音视频开发/">音视频开发</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shadowsocks/">Shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树莓派/">树莓派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编译/">编译</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/音视频开发/">音视频开发</a></li></ul>
     </div>
   </div>
 
@@ -530,7 +627,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Shadowsocks/" style="font-size: 10px;">Shadowsocks</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/并发/" style="font-size: 20px;">并发</a> <a href="/tags/树莓派/" style="font-size: 10px;">树莓派</a> <a href="/tags/编译/" style="font-size: 10px;">编译</a> <a href="/tags/音视频开发/" style="font-size: 10px;">音视频开发</a>
+      <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Shadowsocks/" style="font-size: 10px;">Shadowsocks</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/并发/" style="font-size: 20px;">并发</a> <a href="/tags/树莓派/" style="font-size: 10px;">树莓派</a> <a href="/tags/编译/" style="font-size: 10px;">编译</a> <a href="/tags/音视频开发/" style="font-size: 10px;">音视频开发</a>
     </div>
   </div>
 
@@ -539,7 +636,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li></ul>
     </div>
   </div>
 
@@ -550,6 +647,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/01/05/Java-8-Stream/">Java 8 Stream</a>
+          </li>
         
           <li>
             <a href="/2019/12/21/音视频开发-渲染/">音视频开发---渲染</a>
@@ -567,10 +668,6 @@
             <a href="/2019/08/17/JVM与DVM/">JVM与DVM</a>
           </li>
         
-          <li>
-            <a href="/2019/08/09/synchronized关键字/">synchronized关键字</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -583,7 +680,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2019 John Doe<br>
+      &copy; 2020 John Doe<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
